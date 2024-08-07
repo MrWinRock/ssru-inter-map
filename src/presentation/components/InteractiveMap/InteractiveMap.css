@@ -1,0 +1,110 @@
+.map-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+  margin: auto;
+  width: 80vw;
+  height: 80vh;
+  overflow: hidden;
+  background: white;
+  border: 5px solid black;
+  border-radius: 10px;
+}
+
+.map-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.marker {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 1);
+  border: 3px solid black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.marker:hover {
+  transform: translate(-50%, -50%) scale(1.5);
+  background-color: rgba(255, 255, 255, .5);
+}
+
+.marker-number {
+  position: relative;
+}
+
+.marker-popup-container {
+  position: absolute;
+  transform: translate(-50%, -120%);
+  z-index: 999;
+}
+
+.marker-popup {
+  position: relative;
+  background: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 220px;
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.marker-popup img.popup-image {
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.marker-popup h2 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  padding: 0 15px;
+}
+
+.marker-popup h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  padding: 0 15px;
+}
+
+.marker-popup p {
+  margin: 0;
+  padding: 15px 15px;
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.popup-close:hover {
+  color: red;
+}

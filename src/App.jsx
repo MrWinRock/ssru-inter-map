@@ -1,10 +1,13 @@
 import "./App.css";
-import MainPage from "./presentation/components/MainPage/MainPage";
+import InteractiveMap from "./presentation/components/InteractiveMap/InteractiveMap";
+import NavBar from "./presentation/components/navbar/NavBar";
 
 function App() {
   return (
     <div className="App">
-      <MainPage />
+      <h1 className="title">SSRU Interactive Map</h1>
+      <NavBar />
+      <InteractiveMap />
     </div>
   );
 }
