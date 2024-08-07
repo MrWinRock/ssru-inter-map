@@ -3,20 +3,11 @@ import buildings from "./../../../data/building/buildings";
 import logo from "./../../assets/images/logo.png";
 import "./NavBar.css";
 
-const NavBar = ({ onLocateAndClickSpot }) => {
+const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleLocateClick = (building) => {
-    if (typeof onLocateAndClickSpot === "function") {
-      onLocateAndClickSpot(building);
-    } else {
-      console.error("onLocateAndClickSpot is not a function");
-    }
-    setIsOpen(false);
   };
 
   return (
@@ -34,11 +25,7 @@ const NavBar = ({ onLocateAndClickSpot }) => {
         </div>
         <div className="navbar-menu">
           {buildings.map((building) => (
-            <button
-              key={building.number}
-              className="navbar-menu-item"
-              onClick={() => handleLocateClick(building)}
-            >
+            <button key={building.number} className="navbar-menu-item">
               {building.number}
             </button>
           ))}

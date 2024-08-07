@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { MapInteractionCSS } from "react-map-interaction";
 import ssrumap from "./../../assets/images/ssru_map.png";
 import buildings from "./../../../data/building/buildings";
-import NavBar from "../navbar/NavBar";
 import "./InteractiveMap.css";
 
 const InteractiveMap = () => {
@@ -34,29 +33,8 @@ const InteractiveMap = () => {
     });
   };
 
-  const locateAndClickSpot = (building) => {
-    setValue((prevValue) => ({
-      ...prevValue,
-      translation: { x: building.x, y: building.y },
-    }));
-    setSelectedBuilding(building);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (popupRef.current && !popupRef.current.contains(event.target)) {
-        handleClosePopup();
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   return (
     <div className="map-wrapper">
-      <NavBar onLocateAndClickSpot={locateAndClickSpot} />{" "}
-      {/* Correctly passing the function */}
       <MapInteractionCSS value={value} onChange={handleZoomChange}>
         <div className="map-container">
           <img src={ssrumap} alt="ssru map" className="map-image" />
