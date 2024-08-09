@@ -2,10 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5%;
-  margin: auto;
+  margin: 20px auto 10px 250px;
   width: 80vw;
-  height: 80vh;
+  height: 85vh;
   overflow: hidden;
   background: white;
   border: 5px solid black;
@@ -20,8 +19,8 @@
 }
 
 .map-image {
-  max-width: 100%;
-  max-height: 100%;
+  width: 1529.590px;
+  height: auto;
 }
 
 .marker {

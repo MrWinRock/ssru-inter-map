@@ -3,15 +3,15 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: 86px;
+  width: 10%;
   overflow: hidden;
   z-index: 1000;
   background: #333;
-  transition: width 0.4s ease;
+  transition: width 0.6s ease;
 }
 
 .navbar-wrapper.active {
-  width: 500px;
+  width: 50%;
 }
 
 .navbar-container {
@@ -24,7 +24,6 @@
 .navbar-header {
   display: flex;
   justify-content: space-between;
-  flex-direction: column;
   align-items: center;
   padding: 20px;
   border-bottom: 1px solid #444;
@@ -51,7 +50,19 @@
   background: #fff;
   border-radius: 2px;
   margin: 3px 0;
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition: 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-wrapper.active .navbar-toggle-icon:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.navbar-wrapper.active .navbar-toggle-icon:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-wrapper.active .navbar-toggle-icon:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
 }
 
 .navbar-menu {
@@ -68,9 +79,43 @@
   text-align: left;
   cursor: pointer;
   border-radius: 4px;
-  transition: background 0.3s ease;
+  position: relative;
 }
 
 .navbar-menu-item:hover {
   background: #555;
+}
+
+.navbar-menu-item-content {
+  display: bloak;
+  background: #444;
+  border: none;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 5px 0;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+  z-index: 1001;
+  display: none;
+  position: absolute;
+}
+
+.navbar-menu-item-content.show {
+  display: block;
+}
+
+.navbar-menu-item-content-item {
+  display: block;
+  padding: 10px 20px;
+  white-space: nowrap;
+  text-align: left;
+  color: #333;
+  text-decoration: none;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.navbar-menu-item-content-item:hover {
+  background-color: #f5f5f5;
 }

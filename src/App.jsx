@@ -1,4 +1,5 @@
 import "./App.css";
+import Footer from "./presentation/components/footer/Footer";
 import InteractiveMap from "./presentation/components/InteractiveMap/InteractiveMap";
 import NavBar from "./presentation/components/navbar/NavBar";
 
@@ -7,7 +8,10 @@ function App() {
     <div className="App">
       <h1 className="title">SSRU Interactive Map</h1>
       <NavBar />
-      <InteractiveMap />
+      <div className="interactive-map">
+        <InteractiveMap />
+      </div>
+      <Footer />
     </div>
   );
 }

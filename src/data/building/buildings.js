@@ -43,6 +43,7 @@ import b58 from "./../images/58.jpg";
 
 const buildings = [
   {
+    id: 1,
     number: 11,
     title: "อาคารกรรณาภรณ์พิพัฒน์",
     content: "คณะครุศาสตร์",
@@ -51,6 +52,7 @@ const buildings = [
     y: 3210,
   },
   {
+    id: 1,
     number: 12,
     title: "อาคารนิลรัตนาทร",
     content: "โปรแกรมวิชาภาษาต่างประเทศ",
@@ -59,6 +61,7 @@ const buildings = [
     y: 3435,
   },
   {
+    id: 1,
     number: 13,
     title: "อาคารประชุมพรโสภิณ",
     content: "มัธยมสาธิต",
@@ -67,6 +70,7 @@ const buildings = [
     y: 3390,
   },
   {
+    id: 1,
     number: 14,
     title: "อาคารมัธยมสาธิต",
     content: "มัธยมสาธิต",
@@ -75,6 +79,7 @@ const buildings = [
     y: 3260,
   },
   {
+    id: 1,
     number: 15,
     title: "อาคารมัธยมสาธิต",
     content: "มัธยมสาธิต",
@@ -83,6 +88,7 @@ const buildings = [
     y: 3455,
   },
   {
+    id: 1,
     number: 16,
     title: "อาคารประถมสาธิต",
     content: "ประถมสาธิต",
@@ -91,6 +97,7 @@ const buildings = [
     y: 3200,
   },
   {
+    id: 1,
     number: 17,
     title: "อาคารหอประชุมสุนันทานุสรณ์,ศูนย์อาหารและศูนย์หนังสือ",
     content: "",
@@ -99,6 +106,7 @@ const buildings = [
     y: 2795,
   },
   {
+    id: 2,
     number: 21,
     title: "อาคารศรีจุฑาภา",
     content: "บัญฑิตศึกษาศูนย์คอมพิวเตอร์",
@@ -107,6 +115,7 @@ const buildings = [
     y: 2575,
   },
   {
+    id: 2,
     number: 22,
     title: "อาคารดัฐมราชศิลปสดุดี",
     content: "คณะวิยาศาสตร์และเทคโนโลยี",
@@ -115,6 +124,7 @@ const buildings = [
     y: 2540,
   },
   {
+    id: 2,
     number: 23,
     title: "อาคารวิทยาศาสตร์และสิ่งแวดล้อม",
     content: "คณะวิยาศาสตร์และเทคโนโลยี",
@@ -123,6 +133,7 @@ const buildings = [
     y: 2430,
   },
   {
+    id: 2,
     number: 24,
     title: "อาคารมาลินีนกดารา",
     content: "อาคารประฐมเก่า",
@@ -131,6 +142,7 @@ const buildings = [
     y: 1958,
   },
   {
+    id: 2,
     number: 25,
     title: "อาคารสดับสนธิ์เดียดเกษม",
     content: "โปรแกรมวิชาคหกรรมศาสต์",
@@ -139,6 +151,7 @@ const buildings = [
     y: 1980,
   },
   {
+    id: 2,
     number: 26,
     title: "อาคารศูนย์วิทยาศาสตร์",
     content: "คณะวิทยาศาสตร์และเทคโนโลยี",
@@ -147,6 +160,7 @@ const buildings = [
     y: 2130,
   },
   {
+    id: 2,
     number: 27,
     title: "อาคารสายสุทรานภดล",
     content: "สำนักศิลปวัฒนธรรม",
@@ -155,6 +169,7 @@ const buildings = [
     y: 2140,
   },
   {
+    id: 3,
     number: 31,
     title: "อาคารหอประชุมช่อแก้ว",
     content: "",
@@ -163,6 +178,7 @@ const buildings = [
     y: 1285,
   },
   {
+    id: 3,
     number: 32,
     title: "อาคารปัญจมราชบรรณาศรม",
     content: "สำนักวิทยบริการ",
@@ -171,6 +187,7 @@ const buildings = [
     y: 1495,
   },
   {
+    id: 3,
     number: 33,
     title: "อาคารเฉลิมพระเกียรติฯ",
     content: "สำนักวิทยบริการ",
@@ -179,6 +196,7 @@ const buildings = [
     y: 1495,
   },
   {
+    id: 3,
     number: 34,
     title: "อาคารเทคโนโลยีและนวัตกรรมทางการศึกษา",
     content: "สำนักวิทยบริการ",
@@ -187,6 +205,7 @@ const buildings = [
     y: 1656,
   },
   {
+    id: 3,
     number: 35,
     title: "อาคารนิภานดล",
     content: "คณะมนุษยศาสตร์, อาคารเรียนรวม",
@@ -195,6 +214,7 @@ const buildings = [
     y: 1780,
   },
   {
+    id: 3,
     number: 36,
     title: "อาคารศิลปกรรม",
     content: "",
@@ -203,6 +223,7 @@ const buildings = [
     y: 1860,
   },
   {
+    id: 3,
     number: 37,
     title: "อาคารเหมวดีพิทักษ์",
     content: "สำนักงานอธิการบดี",
@@ -211,6 +232,7 @@ const buildings = [
     y: 1656,
   },
   {
+    id: 3,
     number: 38,
     title: "อาคารลักษณานงค์",
     content: "อาคารพลศึกษา",
@@ -219,6 +241,7 @@ const buildings = [
     y: 1287,
   },
   {
+    id: 3,
     number: 39,
     title: "อาคารศูนย์สุขภาพและสระว่ายน้ำ",
     content: "",
@@ -227,6 +250,7 @@ const buildings = [
     y: 1111,
   },
   {
+    id: 4,
     number: 41,
     title: "อาคารศศิพงษ์ประไพ",
     content: "สำนักกิจการนักศึกษา",
@@ -235,6 +259,7 @@ const buildings = [
     y: 1005,
   },
   {
+    id: 4,
     number: 42,
     title: "อาคารคณะเทคโนโลยีอุตสาหกรรม",
     content: "",
@@ -243,6 +268,7 @@ const buildings = [
     y: 800,
   },
   {
+    id: 4,
     number: 43,
     title: "อาคารสำนักงานคณะเทคโนโลยีอุตสาหกรรม",
     content: "",
@@ -251,6 +277,7 @@ const buildings = [
     y: 915,
   },
   {
+    id: 4,
     number: 44,
     title: "อาคารพิศมัยพิมลสัตย์",
     content: "",
@@ -259,6 +286,7 @@ const buildings = [
     y: 745,
   },
   {
+    id: 4,
     number: 45,
     title: "อาคารจุธารัตนาภรณ์",
     content: "โปรแกรมวิชาดนตรี",
@@ -267,6 +295,7 @@ const buildings = [
     y: 535,
   },
   {
+    id: 4,
     number: 46,
     title: "อาคารอาทรทิพยนิวาส",
     content: "คณะศิลปกรรมศาสตร์",
@@ -275,6 +304,7 @@ const buildings = [
     y: 323,
   },
   {
+    id: 4,
     number: 47,
     title: "อาคารศูนย์ปฎิบัติการเทคโนโลยีการพิมพ์",
     content: "",
@@ -283,6 +313,7 @@ const buildings = [
     y: 310,
   },
   {
+    id: 5,
     number: 51,
     title: "อาคารเอื้ออาชว์แถมถวัลย์",
     content: "",
@@ -291,6 +322,7 @@ const buildings = [
     y: 320,
   },
   {
+    id: 5,
     number: 52,
     title: "7-11",
     content: "",
@@ -299,6 +331,7 @@ const buildings = [
     y: 285,
   },
   {
+    id: 5,
     number: 53,
     title: "อาคารอรประพันธ์อดิศัยศักดิ์",
     content: "โปรแกรมวิชานาฎศิลป์",
@@ -307,6 +340,7 @@ const buildings = [
     y: 310,
   },
   {
+    id: 5,
     number: 54,
     title: "อาคารโรงแรมแก้วเจ้าจอม",
     content: "",
@@ -315,6 +349,7 @@ const buildings = [
     y: 494,
   },
   {
+    id: 5,
     number: 55,
     title: "อาคารเกษตรสินตเสริมศาสตร์",
     content: "",
@@ -323,6 +358,7 @@ const buildings = [
     y: 881,
   },
   {
+    id: 5,
     number: 56,
     title: "อาคารสุวภักตร์นิเวศน์",
     content: "คณะการจัดการ",
@@ -331,6 +367,7 @@ const buildings = [
     y: 705,
   },
   {
+    id: 5,
     number: 57,
     title: "อาคารสุวภักตร์นิเวศน์",
     content: "คณะการจัดการใหม่",
@@ -339,6 +376,7 @@ const buildings = [
     y: 720,
   },
   {
+    id: 5,
     number: 58,
     title: "อาคารคณะศิลปกรรมศาสตร์",
     content: "",
