@@ -3,7 +3,7 @@ import buildings from "./../../../data/building/buildings";
 import logo from "./../../assets/images/logo.png";
 import "./NavBar.css";
 
-const NavBar = () => {
+const NavBar = ({ mapRef }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const navbarRef = useRef(null);
@@ -20,10 +20,21 @@ const NavBar = () => {
     setIsOpen(false);
   }, []);
 
-  const handleButtonClick = (id) => {
+  const handleAreaButtonClick = (id) => {
     openNavbar();
     setSelectedId(id);
-    console.log(`Selected ID: ${id}`); // Debugging line
+  };
+
+  const handleButtonClick = (buildingNumber) => {
+    const building = buildings.find((b) => b.number === buildingNumber);
+    // console.log("Building found: ", building);
+
+    if (building && mapRef.current) {
+      // console.log("Calling focusOnBuilding with: ", building);
+      mapRef.current.focusOnBuilding(building);
+    } else {
+      // console.log("mapRef.current is null or building is null");
+    }
   };
 
   useEffect(() => {
@@ -63,13 +74,13 @@ const NavBar = () => {
             <div key={id} className="navbar-menu-item-wrapper">
               <button
                 className="navbar-menu-item"
-                onClick={() => handleButtonClick(id)}
+                onClick={() => handleAreaButtonClick(id)}
               >
                 เขตพื้นที่ {id}
               </button>
               <div
                 className={`navbar-menu-item-content ${
-                  selectedId === id ? "show" : ""
+                  isOpen && selectedId === id ? "on-active" : "inactive"
                 }`}
               >
                 {buildings
@@ -78,6 +89,7 @@ const NavBar = () => {
                     <button
                       key={building.number}
                       className="navbar-menu-item-content-item"
+                      onClick={() => handleButtonClick(building.number)}
                     >
                       อาคาร {building.number}
                     </button>

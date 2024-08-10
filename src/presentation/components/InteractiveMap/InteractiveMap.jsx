@@ -1,10 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, {
+  useState,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import { MapInteractionCSS } from "react-map-interaction";
 import ssrumap from "./../../assets/images/ssru_map.png";
 import buildings from "./../../../data/building/buildings";
 import "./InteractiveMap.css";
 
-const InteractiveMap = () => {
+const InteractiveMap = forwardRef((props, ref) => {
   const [value, setValue] = useState({
     scale: 1,
     translation: { x: 80, y: 10 },
@@ -32,6 +37,26 @@ const InteractiveMap = () => {
       scale: Math.min(Math.max(newValue.scale, MIN_ZOOM), MAX_ZOOM),
     });
   };
+
+  useImperativeHandle(ref, () => ({
+    focusOnBuilding(building) {
+      // console.log("Ref: ", ref);
+      // console.log("Focus on building: ", building);
+
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      const translationX = viewportWidth / 2 - building.x;
+      const translationY = viewportHeight / 2 - building.y;
+
+      setValue({
+        ...value,
+        scale: 1,
+        translation: { x: translationX, y: translationY },
+      });
+      setSelectedBuilding(building);
+    },
+  }));
 
   return (
     <div className="map-wrapper">
@@ -77,6 +102,6 @@ const InteractiveMap = () => {
       </MapInteractionCSS>
     </div>
   );
-};
+});
 
 export default InteractiveMap;
