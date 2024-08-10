@@ -1,0 +1,115 @@
+.map-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto 10px 250px;
+  width: 80vw;
+  height: 85vh;
+  overflow: hidden;
+  background: white;
+  border: 5px solid black;
+  border-radius: 10px;
+}
+
+.map-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-image {
+  width: 1529.590px;
+  height: auto;
+}
+
+.marker {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 1);
+  border: 3px solid black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.marker:hover {
+  transform: translate(-50%, -50%) scale(1.5);
+  background-color: rgba(255, 255, 255, .5);
+}
+
+.marker-number {
+  position: relative;
+}
+
+.marker-popup-container {
+  position: absolute;
+  transform: translate(-50%, -120%);
+  z-index: 999;
+}
+
+.marker-popup {
+  position: relative;
+  background: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 220px;
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.marker-popup img.popup-image {
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.marker-popup h2 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  padding: 0 15px;
+}
+
+.marker-popup h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  padding: 0 15px;
+}
+
+.marker-popup p {
+  margin: 0;
+  padding: 15px 15px;
+}
+
+.popup-close {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: none;
+  font-size: 32px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: .3s;
+}
+
+.popup-close:hover {
+  color: red;
+  text-shadow: 3px 3px 2px rgba(255, 0, 0, 0.5);
+}
