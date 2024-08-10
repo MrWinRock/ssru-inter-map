@@ -29,15 +29,3 @@ This project is a web application that provides an interactive map of the SSRU (
 2. Explore the interactive map by clicking and dragging to navigate.
 3. Click on a building marker to view more information about the building.
 4. Use the zoom controls to adjust the map scale.
-
-## Contributing
-
-Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
-
-## Contact
-
-For any inquiries or questions, please contact us at [email@example.com](mailto:email@example.com).
