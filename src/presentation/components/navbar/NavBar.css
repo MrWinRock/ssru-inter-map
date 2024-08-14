@@ -1,0 +1,127 @@
+.navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 7%;
+  overflow: hidden;
+  z-index: 1000;
+  background: #333;
+  transition: width 0.6s ease;
+}
+
+.navbar-wrapper.active {
+  width: 13%;
+}
+
+.navbar-container {
+  height: 100%;
+  background: #333;
+  color: #fff;
+  overflow: auto;
+}
+
+.navbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #444;
+}
+
+.navbar-logo img {
+  width: 60px;
+  padding: 15px 0;
+}
+
+.navbar-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-toggle-icon {
+  width: 30px;
+  height: 4px;
+  background: #fff;
+  border-radius: 2px;
+  margin: 3px 0;
+  transition: 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-wrapper.active .navbar-toggle-icon:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.navbar-wrapper.active .navbar-toggle-icon:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-wrapper.active .navbar-toggle-icon:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+.navbar-menu {
+  padding: 20px;
+}
+
+.navbar-menu-item {
+  display: block;
+  background: #444;
+  border: none;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 5px 0;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+  position: relative;
+}
+
+.navbar-menu-item:hover {
+  background: #555;
+}
+
+.navbar-menu-item-content {
+  background: #222;
+  border: none;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  z-index: 1001;
+  display: none;
+  position: relative;
+  transition: .5s ease;
+}
+
+.navbar-menu-item-content.on-active {
+  display: inline-block;
+}
+
+.navbar-menu-item-content.inactive {
+  display: none;
+}
+
+.navbar-menu-item-content-item {
+  display: block;
+  padding: 10px 20px;
+  margin: 5px 0;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: left;
+  color: #fff;
+  text-decoration: none;
+  background: #444;
+  border: none;
+  border-radius: 4px;
+}
+
+.navbar-menu-item-content-item:hover {
+  background-color: #555;
+}
