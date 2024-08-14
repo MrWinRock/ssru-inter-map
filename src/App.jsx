@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="title">SSRU Interactive Map</h1>
+      <h1 className="title text-3xl font-bold">SSRU Interactive Map</h1>
       <NavBar mapRef={mapRef} />
       <div className="interactive-map">
         <InteractiveMap ref={mapRef} />
