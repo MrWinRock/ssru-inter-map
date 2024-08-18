@@ -8,6 +8,9 @@ import { MapInteractionCSS } from "react-map-interaction";
 import ssrumap from "./../../assets/images/ssru_map.png";
 import buildings from "./../../../data/building/buildings";
 
+import { Card } from "react-bootstrap";
+import "./InteractiveMap.css";
+
 const InteractiveMap = forwardRef((props, ref) => {
   const [value, setValue] = useState({
     scale: 1,
@@ -39,9 +42,6 @@ const InteractiveMap = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     focusOnBuilding(building) {
-      // console.log("Ref: ", ref);
-      // console.log("Focus on building: ", building);
-
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
 
@@ -58,18 +58,19 @@ const InteractiveMap = forwardRef((props, ref) => {
   }));
 
   return (
-    <div className="map-wrapper flex justify-center items-center mx-auto my-4 md:my-2 md:ml-64 w-[80vw] h-[85vh] overflow-hidden bg-white border-4 border-black rounded-lg">
-      <MapInteractionCSS value={value} onChange={handleZoomChange}>
-        <div className="map-container relative flex justify-center items-center">
-          <img
-            src={ssrumap}
-            alt="ssru map"
-            className="map-image max-w-[1529.590px] h-auto"
-          />
+    <div className="map-wrapper ">
+      <MapInteractionCSS
+        value={value}
+        onChange={handleZoomChange}
+        minScale={MIN_ZOOM}
+        maxScale={MAX_ZOOM}
+      >
+        <div className="map-container ">
+          <img src={ssrumap} alt="ssru map" className="map-image " />
           {buildings.map((building) => (
             <div
               key={building.number}
-              className="marker absolute w-8 h-8 bg-white border-2 border-black rounded-full flex justify-center items-center cursor-pointer transform -translate-x-1/2 -translate-y-1/2 text-black text-lg font-bold transition-transform duration-300 ease-in-out hover:scale-150 hover:bg-white/50"
+              className="marker"
               style={{ left: building.x, top: building.y }}
               onClick={(e) => handleMapClick(building, e)}
             >
@@ -78,37 +79,36 @@ const InteractiveMap = forwardRef((props, ref) => {
           ))}
           {selectedBuilding && (
             <div
-              className="marker-popup-container absolute transform -translate-x-1/2 -translate-y-[120%] z-50"
+              className="marker-popup-container "
               style={{
                 left: `${selectedBuilding.x}px`,
                 top: `${selectedBuilding.y}px`,
               }}
             >
-              <div
-                className="marker-popup relative bg-white border-2 border-black rounded-lg shadow-lg w-56 text-sm leading-6 cursor-pointer"
-                ref={popupRef}
-              >
+              <Card className="card marker-popup " ref={popupRef}>
                 {selectedBuilding.imageurl && (
-                  <img
+                  <Card.Img
+                    variant="top"
                     src={selectedBuilding.imageurl}
                     alt={`${selectedBuilding.number} building`}
-                    className="popup-image w-full h-auto rounded-md mb-2"
+                    className="card-img-top popup-image"
                   />
                 )}
-                <h2 className="m-0 mb-1 text-lg px-4 font-bold">
-                  {selectedBuilding.number}
-                </h2>
-                <h3 className="m-0 mb-2 text-base px-4 font-bold">
-                  {selectedBuilding.title}
-                </h3>
-                <p className="m-0 p-4">{selectedBuilding.content}</p>
-                <button
-                  className="popup-close absolute top-1.5 right-1.5 w-8 h-8 border-none bg-transparent text-2xl font-bold text-white hover:text-red-500 hover:drop-shadow-[0_2px_2px_rgba(255,0,0,0.5)] transition-colors duration-300"
-                  onClick={handleClosePopup}
-                >
-                  ×
-                </button>
-              </div>
+                <Card.Body className="card-body">
+                  <Card.Title className="card-title mb-3">
+                    อาคาร {selectedBuilding.number}
+                  </Card.Title>
+                  <Card.Subtitle className="card-subtitle mb-2">
+                    {selectedBuilding.title}
+                  </Card.Subtitle>
+                  <Card.Text className="card-text mb-1">
+                    {selectedBuilding.content}
+                  </Card.Text>
+                  <button className="popup-close" onClick={handleClosePopup}>
+                    &#10006;
+                  </button>
+                </Card.Body>
+              </Card>
             </div>
           )}
         </div>
