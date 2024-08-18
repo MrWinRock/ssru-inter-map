@@ -98,6 +98,40 @@
   width: 100%;
 }
 
+.building-button-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.area-button {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 1.5rem;
+}
+
+.area-button::after {
+  content: '';
+  position: absolute;
+  top: 45%;
+  right: 0.5rem;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #fff;
+  transition: transform 0.3s ease;
+}
+
+.area-button.active::after {
+  transform: rotate(180deg);
+}
+
 .area-button,
 .building-button {
   border: none !important;
@@ -106,7 +140,10 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.area-button:hover,
+.area-button:hover {
+  background-color: #3d3d3d !important;
+}
+
 .building-button:hover {
   background-color: #555 !important;
 }
