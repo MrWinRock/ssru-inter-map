@@ -14,17 +14,22 @@ const NavBar = ({ mapRef }) => {
     setShow(!show);
   };
 
-  const handleShowNavbar = () => {
-    setShow(true);
+  const toggleBuilding = (id) => {
+    setSelectedId(selectedId === id ? null : id);
   };
+
+  // const handleShowNavbar = () => {
+  //   setShow(true);
+  // };
 
   const handleCloseNavbar = useCallback(() => {
     setShow(false);
   }, []);
 
   const handleAreaButtonClick = (id) => {
-    handleShowNavbar();
-    setSelectedId(id);
+    // handleShowNavbar();
+    // setSelectedId(id);
+    toggleBuilding(id);
   };
 
   const handleButtonClick = (buildingNumber) => {
@@ -99,14 +104,16 @@ const NavBar = ({ mapRef }) => {
                 <div key={id} className="w-100 mb-2">
                   <Button
                     variant="primary"
-                    className="area-button w-100 mb-2"
+                    className={`area-button w-100 mb-2 ${
+                      selectedId === id ? "active" : ""
+                    }`}
                     style={{ background: "#222" }}
                     onClick={() => handleAreaButtonClick(id)}
                   >
                     เขตพื้นที่ {id}
                   </Button>
                   {selectedId === id && (
-                    <div>
+                    <div className="building-button-container">
                       {buildings
                         .filter((building) => building.id === id)
                         .map((building) => (
