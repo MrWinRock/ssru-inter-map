@@ -14,7 +14,7 @@ import "./InteractiveMap.css";
 const InteractiveMap = forwardRef((props, ref) => {
   const [value, setValue] = useState({
     scale: 1,
-    translation: { x: 80, y: 10 },
+    translation: { x: 0, y: 0 },
   });
 
   const [selectedBuilding, setSelectedBuilding] = useState(null);
@@ -23,6 +23,11 @@ const InteractiveMap = forwardRef((props, ref) => {
 
   const MIN_ZOOM = 0.5;
   const MAX_ZOOM = 2.5;
+
+  const mapWidth = 1890;
+  const mapHeight = 4000;
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
 
   const handleMapClick = (marker, event) => {
     event.stopPropagation();
@@ -33,10 +38,37 @@ const InteractiveMap = forwardRef((props, ref) => {
     setSelectedBuilding(null);
   };
 
+  const limitTranslation = (translation, scale) => {
+    const scaledMapWidth = mapWidth * scale;
+    const scaledMapHeight = mapHeight * scale;
+
+    const maxX = Math.max(
+      (viewportWidth - scaledMapWidth) / 2,
+      viewportWidth - scaledMapWidth
+    );
+    const minX = Math.min((viewportWidth - scaledMapWidth) / 2, 0);
+
+    const maxY = Math.max((viewportHeight - scaledMapHeight) / 2, 0);
+    const minY = Math.min(
+      (viewportHeight - scaledMapHeight) / 2,
+      viewportHeight - scaledMapHeight
+    );
+
+    return {
+      x: Math.min(Math.max(translation.x, minX), maxX),
+      y: Math.min(Math.max(translation.y, minY), maxY),
+    };
+  };
+
   const handleZoomChange = (newValue) => {
+    const limitedTranslation = limitTranslation(
+      newValue.translation,
+      newValue.scale
+    );
     setValue({
       ...newValue,
       scale: Math.min(Math.max(newValue.scale, MIN_ZOOM), MAX_ZOOM),
+      translation: limitedTranslation,
     });
   };
 
@@ -45,8 +77,8 @@ const InteractiveMap = forwardRef((props, ref) => {
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
 
-      const translationX = viewportWidth / 2 - building.x;
-      const translationY = viewportHeight / 2 - building.y;
+      const translationX = viewportWidth / 2 - building.x * value.scale;
+      const translationY = viewportHeight / 2 - building.y * value.scale;
 
       setValue({
         ...value,
@@ -58,15 +90,15 @@ const InteractiveMap = forwardRef((props, ref) => {
   }));
 
   return (
-    <div className="map-wrapper ">
+    <div className="map-wrapper">
       <MapInteractionCSS
         value={value}
         onChange={handleZoomChange}
         minScale={MIN_ZOOM}
         maxScale={MAX_ZOOM}
       >
-        <div className="map-container ">
-          <img src={ssrumap} alt="ssru map" className="map-image " />
+        <div className="map-container">
+          <img src={ssrumap} alt="ssru map" className="map-image" />
           {buildings.map((building) => (
             <div
               key={building.number}
@@ -79,13 +111,13 @@ const InteractiveMap = forwardRef((props, ref) => {
           ))}
           {selectedBuilding && (
             <div
-              className="marker-popup-container "
+              className="marker-popup-container"
               style={{
                 left: `${selectedBuilding.x}px`,
                 top: `${selectedBuilding.y}px`,
               }}
             >
-              <Card className="card marker-popup " ref={popupRef}>
+              <Card className="card marker-popup" ref={popupRef}>
                 {selectedBuilding.imageurl && (
                   <Card.Img
                     variant="top"
