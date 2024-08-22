@@ -42,21 +42,17 @@ const InteractiveMap = forwardRef((props, ref) => {
     const scaledMapWidth = mapWidth * scale;
     const scaledMapHeight = mapHeight * scale;
 
-    const maxX = Math.max(
-      (viewportWidth - scaledMapWidth) / 2,
-      viewportWidth - scaledMapWidth
-    );
-    const minX = Math.min((viewportWidth - scaledMapWidth) / 2, 0);
+    const margin = 500;
 
-    const maxY = Math.max((viewportHeight - scaledMapHeight) / 2, 0);
-    const minY = Math.min(
-      (viewportHeight - scaledMapHeight) / 2,
-      viewportHeight - scaledMapHeight
-    );
+    const minX = Math.min(viewportWidth - scaledMapWidth - margin, margin);
+    const maxX = Math.max(margin, viewportWidth - scaledMapWidth + margin);
+
+    const minY = Math.min(viewportHeight - scaledMapHeight - margin, margin);
+    const maxY = Math.max(margin, viewportHeight - scaledMapHeight + margin);
 
     return {
-      x: Math.min(Math.max(translation.x, minX), maxX),
-      y: Math.min(Math.max(translation.y, minY), maxY),
+      x: Math.max(Math.min(translation.x, maxX), minX),
+      y: Math.max(Math.min(translation.y, maxY), minY),
     };
   };
 
