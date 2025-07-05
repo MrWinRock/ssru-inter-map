@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import buildings from "./../../../data/building/buildings";
 import logo from "./../../assets/images/logo.png";
 
@@ -104,9 +104,8 @@ const NavBar = ({ mapRef }) => {
                 <div key={id} className="w-100 mb-2">
                   <Button
                     variant="primary"
-                    className={`area-button w-100 mb-2 ${
-                      selectedId === id ? "active" : ""
-                    }`}
+                    className={`area-button w-100 mb-2 ${selectedId === id ? "active" : ""
+                      }`}
                     style={{ background: "#222" }}
                     onClick={() => handleAreaButtonClick(id)}
                   >

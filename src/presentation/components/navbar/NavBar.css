@@ -152,3 +152,42 @@
 .building-button:active {
   transform: scale(0.95);
 }
+
+@media (max-width: 768px) {
+  .fixed-left {
+    flex-direction: row;
+    justify-content: space-between;
+    height: auto;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid black;
+    padding: 0.5rem 1rem;
+  }
+
+  .header-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    max-width: 40px;
+    margin-top: 0;
+  }
+
+  .devider {
+    display: none;
+  }
+
+  .hamburger-btn {
+    padding: 0;
+    margin: 0;
+  }
+
+  .navbar-offcanvas {
+    left: 0 !important;
+    top: 65px !important;
+    width: 100%;
+    height: calc(100% - 65px);
+  }
+}

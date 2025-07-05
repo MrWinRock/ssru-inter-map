@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="container-fluid p-0 m-0">
-      <h1 className="display-4 font-weight-bold text-center pt-1 z-index-100">
+      <h1 className="main-title display-4 font-weight-bold text-center pt-1 z-index-100">
         SSRU Interactive Map
       </h1>
       <NavBar mapRef={mapRef} />

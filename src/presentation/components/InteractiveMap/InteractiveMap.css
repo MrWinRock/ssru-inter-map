@@ -91,3 +91,13 @@
 .popup-close:hover {
   color: red;
 }
+
+@media (max-width: 768px) {
+  .map-wrapper {
+    width: 100vw;
+    height: calc(100vh - 65px);
+    margin: 65px 0 0 0;
+    border: none;
+    border-radius: 0;
+  }
+}

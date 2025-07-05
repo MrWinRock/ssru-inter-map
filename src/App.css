@@ -8,3 +8,28 @@
   position: relative;
   margin: 10px auto;
 }
+
+.main-title {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-title {
+    display: none;
+  }
+
+  .interactive-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .footer {
+    display: none !important;
+  }
+}
