@@ -74,7 +74,7 @@ const InteractiveMap = forwardRef((props, ref) => {
 
   const resetPosition = () => {
     if (transformRef.current) {
-      transformRef.current.setTransform(0, 0, 1, 300);
+      transformRef.current.setTransform(initialPositionX, initialPositionY, initialScale, 300);
     }
   };
 

@@ -15,7 +15,7 @@
 .map-container {
   position: relative;
   display: inline-block;
-  background-color: red;
+  /* background-color: red; */
   touch-action: manipulation;
 }
 
