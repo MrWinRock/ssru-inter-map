@@ -9,14 +9,14 @@
   background: white;
   border: 3px solid black;
   border-radius: 10px;
+  touch-action: manipulation;
 }
 
 .map-container {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: inline-block;
   background-color: red;
+  touch-action: manipulation;
 }
 
 .map-image {
@@ -100,4 +100,18 @@
     border: none;
     border-radius: 0;
   }
+}
+
+.reset-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 1000;
 }

@@ -1,10 +1,10 @@
-import React, {
+import {
   useState,
   useRef,
   forwardRef,
   useImperativeHandle,
 } from "react";
-import { MapInteractionCSS } from "react-map-interaction";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import ssrumap from "./../../assets/images/ssru_map.png";
 import buildings from "./../../../data/building/buildings";
 
@@ -12,22 +12,15 @@ import { Card } from "react-bootstrap";
 import "./InteractiveMap.css";
 
 const InteractiveMap = forwardRef((props, ref) => {
-  const [value, setValue] = useState({
-    scale: 1,
-    translation: { x: 0, y: 0 },
-  });
-
   const [selectedBuilding, setSelectedBuilding] = useState(null);
-
-  const popupRef = useRef(null);
+  const transformRef = useRef(null);
+  const mapWrapperRef = useRef(null);
 
   const MIN_ZOOM = 0.5;
   const MAX_ZOOM = 2.5;
 
-  const mapWidth = 1890;
-  const mapHeight = 4000;
-  const viewportWidth = window.innerWidth;
-  const viewportHeight = window.innerHeight;
+  const IMAGE_WIDTH = 1542;
+  const IMAGE_HEIGHT = 3813;
 
   const handleMapClick = (marker, event) => {
     event.stopPropagation();
@@ -38,111 +31,124 @@ const InteractiveMap = forwardRef((props, ref) => {
     setSelectedBuilding(null);
   };
 
-  const limitTranslation = (translation, scale) => {
-    const scaledMapWidth = mapWidth * scale;
-    const scaledMapHeight = mapHeight * scale;
-
-    const margin = 500;
-
-    const minX = Math.min(viewportWidth - scaledMapWidth - margin, margin);
-    const maxX = Math.max(margin, viewportWidth - scaledMapWidth + margin);
-
-    const minY = Math.min(viewportHeight - scaledMapHeight - margin, margin);
-    const maxY = Math.max(margin, viewportHeight - scaledMapHeight + margin);
-
-    return {
-      x: Math.max(Math.min(translation.x, maxX), minX),
-      y: Math.max(Math.min(translation.y, maxY), minY),
-    };
-  };
-
-  const handleZoomChange = (newValue) => {
-    const limitedTranslation = limitTranslation(
-      newValue.translation,
-      newValue.scale
-    );
-    setValue({
-      ...newValue,
-      scale: Math.min(Math.max(newValue.scale, MIN_ZOOM), MAX_ZOOM),
-      translation: limitedTranslation,
-    });
-  };
-
   useImperativeHandle(ref, () => ({
     focusOnBuilding(building) {
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
+      if (transformRef.current) {
+        const viewportWidth = mapWrapperRef.current?.clientWidth || window.innerWidth;
+        const viewportHeight = mapWrapperRef.current?.clientHeight || window.innerHeight;
 
-      const translationX = viewportWidth / 2 - building.x * value.scale;
-      const translationY = viewportHeight / 2 - building.y * value.scale;
+        const translationX = viewportWidth / 2 - building.x;
+        const translationY = viewportHeight / 2 - building.y;
 
-      setValue({
-        ...value,
-        scale: 1,
-        translation: { x: translationX, y: translationY },
-      });
-      setSelectedBuilding(building);
+        transformRef.current.setTransform(translationX, translationY, 1, 300);
+        setSelectedBuilding(building);
+      }
     },
   }));
 
+  const handleTransformed = (ref, state) => {
+    console.log('Transform state:', state);
+  };
+
+  const getTransformBounds = (scale) => {
+    const viewportWidth = mapWrapperRef.current?.clientWidth || window.innerWidth;
+    const viewportHeight = mapWrapperRef.current?.clientHeight || window.innerHeight;
+
+    const scaledImageWidth = IMAGE_WIDTH * scale;
+    const scaledImageHeight = IMAGE_HEIGHT * scale;
+
+    const xBound = Math.max(0, scaledImageWidth - viewportWidth * 0.1)
+    const yBound = Math.max(0, scaledImageHeight - viewportHeight * 0.1);
+
+    return {
+      xMin: -xBound,
+      xMax: xBound,
+      yMin: -yBound,
+      yMax: yBound
+    };
+  };
+
+  const resetPosition = () => {
+    if (transformRef.current) {
+      transformRef.current.setTransform(0, 0, 1, 300);
+    }
+  };
+
   return (
-    <div className="map-wrapper">
-      <MapInteractionCSS
-        value={value}
-        onChange={handleZoomChange}
+    <div className="map-wrapper" ref={mapWrapperRef}>
+      <TransformWrapper
+        ref={transformRef}
+        initialScale={1}
+        initialPositionX={100}
+        initialPositionY={0}
         minScale={MIN_ZOOM}
         maxScale={MAX_ZOOM}
+        wheel={{ step: 0.1 }}
+        pinch={{ step: 5 }}
+        doubleClick={{ disabled: true }}
+        limitToBounds={false}
+        centerOnInit={false}
+        onTransformed={handleTransformed}
+        bounds={getTransformBounds}
+        smooth={true}
       >
-        <div className="map-container">
-          <img src={ssrumap} alt="ssru map" className="map-image" />
-          {buildings.map((building) => (
-            <div
-              key={building.number}
-              className="marker"
-              style={{ left: building.x, top: building.y }}
-              onClick={(e) => handleMapClick(building, e)}
-            >
-              <span className="marker-number">{building.number}</span>
-            </div>
-          ))}
-          {selectedBuilding && (
-            <div
-              className="marker-popup-container"
-              style={{
-                left: `${selectedBuilding.x}px`,
-                top: `${selectedBuilding.y}px`,
-              }}
-            >
-              <Card className="card marker-popup" ref={popupRef}>
-                {selectedBuilding.imageurl && (
-                  <Card.Img
-                    variant="top"
-                    src={selectedBuilding.imageurl}
-                    alt={`${selectedBuilding.number} building`}
-                    className="card-img-top popup-image"
-                  />
-                )}
-                <Card.Body className="card-body">
-                  <Card.Title className="card-title mb-3">
-                    อาคาร {selectedBuilding.number}
-                  </Card.Title>
-                  <Card.Subtitle className="card-subtitle mb-2">
-                    {selectedBuilding.title}
-                  </Card.Subtitle>
-                  <Card.Text className="card-text mb-1">
-                    {selectedBuilding.content}
-                  </Card.Text>
-                  <button className="popup-close" onClick={handleClosePopup}>
-                    &#10006;
-                  </button>
-                </Card.Body>
-              </Card>
-            </div>
-          )}
-        </div>
-      </MapInteractionCSS>
+        <button className="reset-button" onClick={resetPosition}>
+          Reset
+        </button>
+        <TransformComponent>
+          <div className="map-container">
+            <img src={ssrumap} alt="ssru map" className="map-image" />
+            {buildings.map((building) => (
+              <div
+                key={building.number}
+                className="marker"
+                style={{ left: building.x, top: building.y }}
+                onClick={(e) => handleMapClick(building, e)}
+              >
+                <span className="marker-number">{building.number}</span>
+              </div>
+            ))}
+            {selectedBuilding && (
+              <div
+                className="marker-popup-container"
+                style={{
+                  left: `${selectedBuilding.x}px`,
+                  top: `${selectedBuilding.y}px`,
+                }}
+              >
+                <Card className="card marker-popup">
+                  {selectedBuilding.imageurl && (
+                    <Card.Img
+                      variant="top"
+                      src={selectedBuilding.imageurl}
+                      alt={`${selectedBuilding.number} building`}
+                      className="card-img-top popup-image"
+                    />
+                  )}
+                  <Card.Body className="card-body">
+                    <Card.Title className="card-title mb-3">
+                      อาคาร {selectedBuilding.number}
+                    </Card.Title>
+                    <Card.Subtitle className="card-subtitle mb-2">
+                      {selectedBuilding.title}
+                    </Card.Subtitle>
+                    <Card.Text className="card-text mb-1">
+                      {selectedBuilding.content}
+                    </Card.Text>
+                    <button className="popup-close" onClick={handleClosePopup}>
+                      &#10006;
+                    </button>
+                  </Card.Body>
+                </Card>
+              </div>
+            )}
+          </div>
+        </TransformComponent>
+      </TransformWrapper>
     </div>
   );
 });
+
+InteractiveMap.displayName = "InteractiveMap";
 
 export default InteractiveMap;
