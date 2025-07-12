@@ -16,6 +16,10 @@ const InteractiveMap = forwardRef((props, ref) => {
   const transformRef = useRef(null);
   const mapWrapperRef = useRef(null);
 
+  const initialScale = 0.7;
+  const initialPositionX = 50;
+  const initialPositionY = 1500;
+
   const MIN_ZOOM = 0.5;
   const MAX_ZOOM = 2.5;
 
@@ -46,11 +50,11 @@ const InteractiveMap = forwardRef((props, ref) => {
     },
   }));
 
-  const handleTransformed = (ref, state) => {
-    console.log('Transform state:', state);
-  };
+  // const handleTransformed = (ref, state) => {
+  //   console.log('Transform state:', state);
+  // };
 
-  const getTransformBounds = (scale) => {
+  const getTransformBounds = ({ scale }) => {
     const viewportWidth = mapWrapperRef.current?.clientWidth || window.innerWidth;
     const viewportHeight = mapWrapperRef.current?.clientHeight || window.innerHeight;
 
@@ -76,11 +80,14 @@ const InteractiveMap = forwardRef((props, ref) => {
 
   return (
     <div className="map-wrapper" ref={mapWrapperRef}>
+      <button className="reset-button" onClick={resetPosition}>
+        Reset
+      </button>
       <TransformWrapper
         ref={transformRef}
-        initialScale={1}
-        initialPositionX={100}
-        initialPositionY={0}
+        initialScale={initialScale}
+        initialPositionX={initialPositionX}
+        initialPositionY={initialPositionY}
         minScale={MIN_ZOOM}
         maxScale={MAX_ZOOM}
         wheel={{ step: 0.1 }}
@@ -88,16 +95,13 @@ const InteractiveMap = forwardRef((props, ref) => {
         doubleClick={{ disabled: true }}
         limitToBounds={false}
         centerOnInit={false}
-        onTransformed={handleTransformed}
+        // onTransformed={handleTransformed}
         bounds={getTransformBounds}
         smooth={true}
       >
-        <button className="reset-button" onClick={resetPosition}>
-          Reset
-        </button>
         <TransformComponent>
           <div className="map-container">
-            <img src={ssrumap} alt="ssru map" className="map-image" />
+            <img src={ssrumap} alt="ssru campus map" className="map-image" />
             {buildings.map((building) => (
               <div
                 key={building.number}
