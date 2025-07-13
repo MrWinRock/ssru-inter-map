@@ -13,12 +13,16 @@ import "./InteractiveMap.css";
 
 const InteractiveMap = forwardRef((props, ref) => {
   const [selectedBuilding, setSelectedBuilding] = useState(null);
+  const [mapReady, setMapReady] = useState(false);
   const transformRef = useRef(null);
   const mapWrapperRef = useRef(null);
 
   const initialScale = 0.7;
   const initialPositionX = 50;
   const initialPositionY = 1500;
+
+  const CENTER_X = 757.31;
+  const CENTER_Y = 2157.93;
 
   const MIN_ZOOM = 0.5;
   const MAX_ZOOM = 2.5;
@@ -37,22 +41,36 @@ const InteractiveMap = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     focusOnBuilding(building) {
-      if (transformRef.current) {
-        const viewportWidth = mapWrapperRef.current?.clientWidth || window.innerWidth;
-        const viewportHeight = mapWrapperRef.current?.clientHeight || window.innerHeight;
+      const attemptFocus = () => {
+        if (transformRef.current && mapWrapperRef.current) {
+          const positionX = CENTER_X - building.x;
+          const positionY = CENTER_Y - building.y;
 
-        const translationX = viewportWidth / 2 - building.x;
-        const translationY = viewportHeight / 2 - building.y;
+          console.log("Calculated transform:", { positionX, positionY });
 
-        transformRef.current.setTransform(translationX, translationY, 1, 300);
-        setSelectedBuilding(building);
+          transformRef.current.setTransform(positionX, positionY, 1, 300);
+          setSelectedBuilding(building);
+        } else {
+          console.warn("Transform/mapWrapper ref not ready yet.");
+        }
+      };
+
+      if (!mapReady) {
+        const interval = setInterval(() => {
+          if (mapReady) {
+            clearInterval(interval);
+            requestAnimationFrame(attemptFocus);
+          }
+        }, 50);
+      } else {
+        requestAnimationFrame(attemptFocus);
       }
     },
   }));
 
-  // const handleTransformed = (ref, state) => {
-  //   console.log('Transform state:', state);
-  // };
+  const handleTransformed = (_, state) => {
+    console.log("TRANSFORMED STATE:", state);
+  };
 
   const getTransformBounds = ({ scale }) => {
     const viewportWidth = mapWrapperRef.current?.clientWidth || window.innerWidth;
@@ -84,7 +102,10 @@ const InteractiveMap = forwardRef((props, ref) => {
         Reset
       </button>
       <TransformWrapper
-        ref={transformRef}
+        onInit={(api) => {
+          console.log("Transform API initialized", api);
+          transformRef.current = api;
+        }}
         initialScale={initialScale}
         initialPositionX={initialPositionX}
         initialPositionY={initialPositionY}
@@ -95,13 +116,19 @@ const InteractiveMap = forwardRef((props, ref) => {
         doubleClick={{ disabled: true }}
         limitToBounds={false}
         centerOnInit={false}
-        // onTransformed={handleTransformed}
+        onTransformed={handleTransformed}
         bounds={getTransformBounds}
         smooth={true}
       >
         <TransformComponent>
           <div className="map-container">
-            <img src={ssrumap} alt="ssru campus map" className="map-image" />
+            <img
+              src={ssrumap}
+              alt="ssru campus map"
+              className="map-image"
+              onLoad={() => setMapReady(true)}
+            />
+
             {buildings.map((building) => (
               <div
                 key={building.number}

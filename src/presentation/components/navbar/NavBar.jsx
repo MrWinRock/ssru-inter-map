@@ -35,8 +35,16 @@ const NavBar = ({ mapRef }) => {
   const handleButtonClick = (buildingNumber) => {
     const building = buildings.find((b) => b.number === buildingNumber);
 
+    // Debug: Log the building object
+    console.log("Building found:", building);
+
     if (building && mapRef.current) {
+      // Debug: Log mapRef.current
+      console.log("mapRef.current:", mapRef.current);
+
       mapRef.current.focusOnBuilding(building);
+    } else {
+      console.error("Building not found or mapRef is null");
     }
   };
 
