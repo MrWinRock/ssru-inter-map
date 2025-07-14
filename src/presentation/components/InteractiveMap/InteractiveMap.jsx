@@ -21,9 +21,6 @@ const InteractiveMap = forwardRef((props, ref) => {
   const initialPositionX = 50;
   const initialPositionY = 1500;
 
-  const CENTER_X = 757.31;
-  const CENTER_Y = 2157.93;
-
   const MIN_ZOOM = 0.5;
   const MAX_ZOOM = 2.5;
 
@@ -41,29 +38,50 @@ const InteractiveMap = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     focusOnBuilding(building) {
-      const attemptFocus = () => {
-        if (transformRef.current && mapWrapperRef.current) {
-          const positionX = CENTER_X - building.x;
-          const positionY = CENTER_Y - building.y;
+      const zoomThenCenter = () => {
+        const transformApi = transformRef.current;
+        const mapWrapper = mapWrapperRef.current;
 
-          console.log("Calculated transform:", { positionX, positionY });
-
-          transformRef.current.setTransform(positionX, positionY, 1, 300);
-          setSelectedBuilding(building);
-        } else {
-          console.warn("Transform/mapWrapper ref not ready yet.");
+        if (!transformApi || !mapWrapper) {
+          console.warn("Transform or mapWrapper not ready.");
+          return;
         }
+
+        transformApi.setTransform(transformApi.state.positionX, transformApi.state.positionY, 1, 300);
+
+        setTimeout(() => {
+          const markerElement = document.getElementById(`marker-${building.number}`);
+          if (!markerElement) {
+            console.warn("Marker not found in DOM.");
+            return;
+          }
+
+          const markerRect = markerElement.getBoundingClientRect();
+          const wrapperRect = mapWrapper.getBoundingClientRect();
+
+          const verticalOffset = 200;
+          const horizontalOffset = 0;
+
+          const offsetX = wrapperRect.width / 2 - (markerRect.left + markerRect.width / 2) + horizontalOffset;
+          const offsetY = wrapperRect.height / 2 - (markerRect.top + markerRect.height / 2) + verticalOffset;
+
+          const newX = transformApi.state.positionX + offsetX;
+          const newY = transformApi.state.positionY + offsetY;
+
+          transformApi.setTransform(newX, newY, 1, 300);
+          setSelectedBuilding(building);
+        }, 320);
       };
 
       if (!mapReady) {
         const interval = setInterval(() => {
           if (mapReady) {
             clearInterval(interval);
-            requestAnimationFrame(attemptFocus);
+            requestAnimationFrame(zoomThenCenter);
           }
         }, 50);
       } else {
-        requestAnimationFrame(attemptFocus);
+        requestAnimationFrame(zoomThenCenter);
       }
     },
   }));
@@ -133,9 +151,11 @@ const InteractiveMap = forwardRef((props, ref) => {
               <div
                 key={building.number}
                 className="marker"
+                id={`marker-${building.number}`}
                 style={{ left: building.x, top: building.y }}
                 onClick={(e) => handleMapClick(building, e)}
               >
+
                 <span className="marker-number">{building.number}</span>
               </div>
             ))}
