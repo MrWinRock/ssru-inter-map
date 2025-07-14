@@ -13,6 +13,7 @@ import "./InteractiveMap.css";
 
 const InteractiveMap = forwardRef((props, ref) => {
   const [selectedBuilding, setSelectedBuilding] = useState(null);
+  const [mapReady, setMapReady] = useState(false);
   const transformRef = useRef(null);
   const mapWrapperRef = useRef(null);
 
@@ -26,6 +27,8 @@ const InteractiveMap = forwardRef((props, ref) => {
   const IMAGE_WIDTH = 1542;
   const IMAGE_HEIGHT = 3813;
 
+  const ANIMATION_TIMEOUT = 320;
+
   const handleMapClick = (marker, event) => {
     event.stopPropagation();
     setSelectedBuilding(marker);
@@ -37,21 +40,56 @@ const InteractiveMap = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     focusOnBuilding(building) {
-      if (transformRef.current) {
-        const viewportWidth = mapWrapperRef.current?.clientWidth || window.innerWidth;
-        const viewportHeight = mapWrapperRef.current?.clientHeight || window.innerHeight;
+      const zoomThenCenter = () => {
+        const transformApi = transformRef.current;
+        const mapWrapper = mapWrapperRef.current;
 
-        const translationX = viewportWidth / 2 - building.x;
-        const translationY = viewportHeight / 2 - building.y;
+        if (!transformApi || !mapWrapper) {
+          console.warn("Transform or mapWrapper not ready.");
+          return;
+        }
 
-        transformRef.current.setTransform(translationX, translationY, 1, 300);
-        setSelectedBuilding(building);
+        transformApi.setTransform(transformApi.state.positionX, transformApi.state.positionY, 1, 300);
+
+        setTimeout(() => {
+          const markerElement = document.getElementById(`marker-${building.number}`);
+          if (!markerElement) {
+            console.warn("Marker not found in DOM.");
+            return;
+          }
+
+          const markerRect = markerElement.getBoundingClientRect();
+          const wrapperRect = mapWrapper.getBoundingClientRect();
+
+          const verticalOffset = 200;
+          const horizontalOffset = 0;
+
+          const offsetX = wrapperRect.width / 2 - (markerRect.left + markerRect.width / 2) + horizontalOffset;
+          const offsetY = wrapperRect.height / 2 - (markerRect.top + markerRect.height / 2) + verticalOffset;
+
+          const newX = transformApi.state.positionX + offsetX;
+          const newY = transformApi.state.positionY + offsetY;
+
+          transformApi.setTransform(newX, newY, 1, 300);
+          setSelectedBuilding(building);
+        }, ANIMATION_TIMEOUT);
+      };
+
+      if (!mapReady) {
+        const interval = setInterval(() => {
+          if (mapReady) {
+            clearInterval(interval);
+            requestAnimationFrame(zoomThenCenter);
+          }
+        }, 50);
+      } else {
+        requestAnimationFrame(zoomThenCenter);
       }
     },
   }));
 
-  // const handleTransformed = (ref, state) => {
-  //   console.log('Transform state:', state);
+  // const handleTransformed = (_, state) => {
+  //   console.log("TRANSFORMED STATE:", state);
   // };
 
   const getTransformBounds = ({ scale }) => {
@@ -84,7 +122,9 @@ const InteractiveMap = forwardRef((props, ref) => {
         Reset
       </button>
       <TransformWrapper
-        ref={transformRef}
+        onInit={(api) => {
+          transformRef.current = api;
+        }}
         initialScale={initialScale}
         initialPositionX={initialPositionX}
         initialPositionY={initialPositionY}
@@ -101,14 +141,22 @@ const InteractiveMap = forwardRef((props, ref) => {
       >
         <TransformComponent>
           <div className="map-container">
-            <img src={ssrumap} alt="ssru campus map" className="map-image" />
+            <img
+              src={ssrumap}
+              alt="ssru campus map"
+              className="map-image"
+              onLoad={() => setMapReady(true)}
+            />
+
             {buildings.map((building) => (
               <div
                 key={building.number}
                 className="marker"
+                id={`marker-${building.number}`}
                 style={{ left: building.x, top: building.y }}
                 onClick={(e) => handleMapClick(building, e)}
               >
+
                 <span className="marker-number">{building.number}</span>
               </div>
             ))}

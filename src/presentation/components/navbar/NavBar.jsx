@@ -37,6 +37,8 @@ const NavBar = ({ mapRef }) => {
 
     if (building && mapRef.current) {
       mapRef.current.focusOnBuilding(building);
+    } else {
+      console.error("Building not found or mapRef is null");
     }
   };
 
