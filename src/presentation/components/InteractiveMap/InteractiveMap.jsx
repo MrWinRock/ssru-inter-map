@@ -27,6 +27,8 @@ const InteractiveMap = forwardRef((props, ref) => {
   const IMAGE_WIDTH = 1542;
   const IMAGE_HEIGHT = 3813;
 
+  const ANIMATION_TIMEOUT = 320;
+
   const handleMapClick = (marker, event) => {
     event.stopPropagation();
     setSelectedBuilding(marker);
@@ -70,7 +72,7 @@ const InteractiveMap = forwardRef((props, ref) => {
 
           transformApi.setTransform(newX, newY, 1, 300);
           setSelectedBuilding(building);
-        }, 320);
+        }, ANIMATION_TIMEOUT);
       };
 
       if (!mapReady) {
@@ -86,9 +88,9 @@ const InteractiveMap = forwardRef((props, ref) => {
     },
   }));
 
-  const handleTransformed = (_, state) => {
-    console.log("TRANSFORMED STATE:", state);
-  };
+  // const handleTransformed = (_, state) => {
+  //   console.log("TRANSFORMED STATE:", state);
+  // };
 
   const getTransformBounds = ({ scale }) => {
     const viewportWidth = mapWrapperRef.current?.clientWidth || window.innerWidth;
@@ -121,7 +123,6 @@ const InteractiveMap = forwardRef((props, ref) => {
       </button>
       <TransformWrapper
         onInit={(api) => {
-          console.log("Transform API initialized", api);
           transformRef.current = api;
         }}
         initialScale={initialScale}
@@ -134,7 +135,7 @@ const InteractiveMap = forwardRef((props, ref) => {
         doubleClick={{ disabled: true }}
         limitToBounds={false}
         centerOnInit={false}
-        onTransformed={handleTransformed}
+        // onTransformed={handleTransformed}
         bounds={getTransformBounds}
         smooth={true}
       >
