@@ -153,6 +153,10 @@
   transform: scale(0.95);
 }
 
+.mobile-language-selector {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .fixed-left {
     flex-direction: row;
@@ -189,5 +193,22 @@
     top: 65px !important;
     width: 100%;
     height: calc(100% - 65px);
+  }
+
+  .items-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-language-selector {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-language-selector {
+    align-items: center;
   }
 }

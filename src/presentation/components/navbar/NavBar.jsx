@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslation } from 'react-i18next';
 import buildings from "./../../../data/building/buildings";
 import logo from "./../../assets/images/logo.png";
+import LanguageSelector from "../selector/LanguageSelector";
 
 import { Offcanvas, Button } from "react-bootstrap";
 import "./NavBar.css";
@@ -67,21 +68,27 @@ const NavBar = ({ mapRef }) => {
         <div className="header-container">
           <img src={logo} alt="Logo" className="logo" />
           <span className="devider"></span>
-          <Button
-            variant="link"
-            className="hamburger-btn"
-            onClick={toggleNavbar}
-          >
-            <div className={`hamburger ${show ? "open" : ""}`}>
-              <span></span>
-              <span></span>
-              <span></span>
+          <div className="items-container">
+            <div className="mobile-language-selector">
+              <LanguageSelector inNavbar={true} />
             </div>
-          </Button>
+            <Button
+              variant="link"
+              className="hamburger-btn"
+              onClick={toggleNavbar}
+            >
+              <div className={`hamburger ${show ? "open" : ""}`}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </Button>
+          </div>
         </div>
       </div>
 
       <div ref={offcanvasRef}>
+
         <Offcanvas
           show={show}
           onHide={handleCloseNavbar}
@@ -97,6 +104,7 @@ const NavBar = ({ mapRef }) => {
           </Offcanvas.Header>
           <span className="devider"></span>
           <Offcanvas.Body className="canvas-body">
+
             {[...new Set(buildings.map((building) => building.id))].map(
               (id) => (
                 <div key={id} className="w-100 mb-2">

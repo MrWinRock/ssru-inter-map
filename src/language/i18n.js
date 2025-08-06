@@ -5,7 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 const resources = {
     th: {
         translation: {
-            "title": "แผนที่แบบโต้ตอบ.",
+            "title": "แผนที่แบบโต้ตอบ",
             "buildings": "อาคาร",
             "area": "เขตพื้นที่",
             "building": "อาคาร",
@@ -15,8 +15,8 @@ const resources = {
             "university_address": "1 ถนนอู่ทองนอก ดุสิต กรุงเทพฯ 10300",
             "language": "ภาษา",
             "thai": "ไทย",
-            "english": "อังกฤษ",
-            "chinese": "จีน",
+            "english": "English",
+            "chinese": "中文",
             "buildings_data": {
                 "11": {
                     "title": "อาคารกรรณาภรณ์พิพัฒน์",
@@ -184,9 +184,9 @@ const resources = {
             "university_name": "SUAN SUAN‑SUNANDHA RAJABHAT UNIVERSITY",
             "university_address": "1 U‑Thong Nok Road, Dusit, Bangkok 10300 Thailand",
             "language": "Language",
-            "thai": "Thai",
+            "thai": "ไทย",
             "english": "English",
-            "chinese": "Chinese",
+            "chinese": "中文",
             "buildings_data": {
                 "11": {
                     "title": "Kannabhornbhibhat Building",
@@ -337,161 +337,169 @@ const resources = {
     },
     zh: {
         translation: {
-            "title": "素攀孙他皇家大学互动地图",
+            "title": "素攀武里皇家大学互动地图",
             "buildings": "建筑物",
             "area": "区域",
             "building": "建筑",
             "reset": "重置",
-            "contact": "联系",
-            "university_name": "素攀孙他皇家大学",
+            "contact": "联系我们",
+            "university_name": "泰国宣素那他皇家大学",
             "university_address": "泰国曼谷都实区乌通诺路1号 10300",
             "language": "语言",
-            "thai": "泰语",
-            "english": "英语",
+            "thai": "ไทย",
+            "english": "English",
             "chinese": "中文",
             "buildings_data": {
                 "11": {
-                    "title": "甘纳帕蓬·披帕建筑",
+                    "title": "甘纳蓬披帕楼",
                     "content": "教育学院"
                 },
                 "12": {
-                    "title": "尼拉塔纳通建筑",
-                    "content": "示范学校英语项目"
+                    "title": "尼拉塔纳通楼",
+                    "content": "外语课程项目"
                 },
                 "13": {
-                    "title": "帕春蓬索平建筑",
+                    "title": "帕冲蓬索宾楼",
                     "content": "示范中学"
                 },
                 "14": {
-                    "title": "示范中学建筑（中学）",
+                    "title": "示范中学楼",
                     "content": "示范中学"
                 },
                 "15": {
-                    "title": "示范中学建筑（中学）",
+                    "title": "示范中学楼",
                     "content": "示范中学"
                 },
                 "16": {
-                    "title": "示范小学建筑",
+                    "title": "示范小学楼",
                     "content": "示范小学"
                 },
                 "17": {
-                    "title": "素南塔努颂礼堂",
+                    "title": "苏南塔努颂礼堂、餐饮中心与图书中心",
                     "content": ""
                 },
                 "21": {
-                    "title": "诗朱达帕建筑",
-                    "content": "研究生院"
+                    "title": "希朱达帕楼",
+                    "content": "研究生院与计算机中心"
                 },
                 "22": {
-                    "title": "查达玛·拉贾·席帕·萨杜迪建筑",
+                    "title": "达玛拉查艺术纪念楼",
                     "content": "科学技术学院"
                 },
                 "23": {
-                    "title": "科学与技术学院",
-                    "content": ""
+                    "title": "科学与环境楼",
+                    "content": "科学技术学院"
                 },
                 "24": {
-                    "title": "玛丽尼·诺布哈达拉建筑",
-                    "content": ""
+                    "title": "玛琳妮诺帕达拉楼",
+                    "content": "旧小学楼"
                 },
                 "25": {
-                    "title": "萨达本迪·恰得卡森建筑",
-                    "content": "家政学院"
+                    "title": "萨达颂迪迪雅格森楼",
+                    "content": "家政学课程"
                 },
                 "26": {
-                    "title": "科学中心建筑",
-                    "content": ""
+                    "title": "科学中心楼",
+                    "content": "科学技术学院"
                 },
                 "27": {
-                    "title": "赛素达纳帕东建筑",
-                    "content": "艺术文化办公室"
+                    "title": "赛苏达纳帕东楼",
+                    "content": "文化艺术办公室"
                 },
                 "31": {
-                    "title": "信息与科技中心建筑",
-                    "content": "信息技术中心"
-                },
-                "32": {
-                    "title": "班查玛拉·班纳松建筑",
-                    "content": "校长办公室"
-                },
-                "33": {
-                    "title": "查勒姆普拉吉拉特建筑",
-                    "content": "学术资源与信息技术（图书馆）楼"
-                },
-                "34": {
-                    "title": "教育创新与科技建筑",
+                    "title": "昭告会议厅",
                     "content": ""
                 },
+                "32": {
+                    "title": "潘查玛拉班纳松楼",
+                    "content": "学术资源办公室"
+                },
+                "33": {
+                    "title": "崇圣纪念楼",
+                    "content": "学术资源办公室"
+                },
+                "34": {
+                    "title": "教育技术与创新楼",
+                    "content": "学术资源办公室"
+                },
                 "35": {
-                    "title": "尼帕·诺布哈达拉建筑",
-                    "content": "人文与社会科学学院"
+                    "title": "尼帕纳东楼",
+                    "content": "人文学院、综合教学楼"
                 },
                 "36": {
-                    "title": "美术与应用艺术学院建筑",
+                    "title": "艺术学院楼",
                     "content": ""
                 },
                 "37": {
-                    "title": "赫姆瓦迪·披塔建筑",
-                    "content": ""
+                    "title": "汉瓦迪披塔楼",
+                    "content": "校长办公室"
                 },
                 "38": {
-                    "title": "沃拉克萨南农建筑",
+                    "title": "沃拉纳南楼",
+                    "content": "体育教学楼"
+                },
+                "39": {
+                    "title": "健康中心与游泳池",
                     "content": ""
                 },
                 "41": {
-                    "title": "萨西蓬塞普赖建筑",
-                    "content": "研究与发展所"
+                    "title": "萨西蓬帕莱楼",
+                    "content": "学生事务办公室"
                 },
                 "42": {
-                    "title": "工业技术学院建筑",
+                    "title": "工业技术学院楼",
                     "content": ""
                 },
                 "43": {
-                    "title": "工业技术学院办公楼",
+                    "title": "工业技术学院办公室",
                     "content": ""
                 },
                 "44": {
-                    "title": "比斯迈·比玛拉亚萨塔雅建筑",
+                    "title": "比斯迈披玛拉萨塔亚楼",
                     "content": ""
                 },
                 "45": {
-                    "title": "朱塔拉塔纳邦建筑",
-                    "content": ""
+                    "title": "朱达拉塔纳蓬楼",
+                    "content": "音乐课程项目"
                 },
                 "46": {
-                    "title": "阿通迪巴雅尼瓦萨建筑",
-                    "content": ""
+                    "title": "阿通迪巴尼瓦楼",
+                    "content": "艺术学院"
                 },
                 "47": {
-                    "title": "多媒体技术操作中心建筑",
+                    "title": "印刷技术实践中心",
                     "content": ""
                 },
                 "51": {
-                    "title": "阿旺阿查瓦·潭塔瓦拉雅",
+                    "title": "奥阿察塔塔瓦拉亚楼",
                     "content": ""
                 },
+                "52": {
+                    "title": "7-11便利店",
+                    "content": ""
+                },
+                "53": {
+                    "title": "奥帕拉潘阿迪萨萨克楼",
+                    "content": "舞蹈艺术课程"
+                },
                 "54": {
-                    "title": "王素攀孙他酒店",
+                    "title": "王宫宝石酒店",
                     "content": ""
                 },
                 "55": {
-                    "title": "卡赛辛瑟姆萨特建筑",
+                    "title": "农业技术推广楼",
                     "content": ""
                 },
                 "56": {
-                    "title": "苏瓦巴克特拉尼维萨建筑",
-                    "content": ""
+                    "title": "苏瓦帕尼威楼",
+                    "content": "管理学院"
                 },
                 "57": {
-                    "title": "苏瓦巴克特拉尼维萨建筑",
-                    "content": ""
+                    "title": "苏瓦帕尼威楼",
+                    "content": "新管理学院"
                 },
                 "58": {
-                    "title": "美术与应用艺术学院建筑",
-                    "content": ""
-                },
-                "59": {
-                    "title": "王素攀孙他酒店（第2区）",
+                    "title": "艺术学院楼",
                     "content": ""
                 }
             }

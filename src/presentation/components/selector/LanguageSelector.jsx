@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dropdown } from 'react-bootstrap';
 import './LanguageSelector.css';
 
-const LanguageSelector = () => {
+const LanguageSelector = ({ inNavbar = false }) => {
     const { i18n, t } = useTranslation();
     const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
 
@@ -22,8 +22,12 @@ const LanguageSelector = () => {
         return languages.find(lang => lang.code === currentLanguage) || languages[0];
     };
 
+    useEffect(() => {
+        setCurrentLanguage(i18n.language);
+    }, [i18n.language]);
+
     return (
-        <div className="language-selector">
+        <div className={`language-selector ${inNavbar ? 'navbar-language-selector' : ''}`}>
             <Dropdown>
                 <Dropdown.Toggle
                     variant="outline-dark"
@@ -31,6 +35,7 @@ const LanguageSelector = () => {
                     className="language-toggle"
                 >
                     <span className="flag-emoji">{getCurrentLanguage().flag}</span>
+                    <span className="language-divider">/</span>
                     <span className="language-name">{getCurrentLanguage().name}</span>
                 </Dropdown.Toggle>
 
@@ -42,6 +47,7 @@ const LanguageSelector = () => {
                             active={currentLanguage === language.code}
                         >
                             <span className="flag-emoji">{language.flag}</span>
+                            <span className="language-divider">/</span>
                             <span className="language-name">{language.name}</span>
                         </Dropdown.Item>
                     ))}

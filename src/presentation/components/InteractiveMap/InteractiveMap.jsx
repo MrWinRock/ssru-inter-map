@@ -4,6 +4,7 @@ import {
   forwardRef,
   useImperativeHandle,
 } from "react";
+import { useTranslation } from 'react-i18next';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import ssrumap from "./../../assets/images/ssru_map.png";
 import buildings from "./../../../data/building/buildings";
@@ -12,6 +13,7 @@ import { Card } from "react-bootstrap";
 import "./InteractiveMap.css";
 
 const InteractiveMap = forwardRef((props, ref) => {
+  const { t } = useTranslation();
   const [selectedBuilding, setSelectedBuilding] = useState(null);
   const [mapReady, setMapReady] = useState(false);
   const transformRef = useRef(null);
@@ -88,10 +90,6 @@ const InteractiveMap = forwardRef((props, ref) => {
     },
   }));
 
-  // const handleTransformed = (_, state) => {
-  //   console.log("TRANSFORMED STATE:", state);
-  // };
-
   const getTransformBounds = ({ scale }) => {
     const viewportWidth = mapWrapperRef.current?.clientWidth || window.innerWidth;
     const viewportHeight = mapWrapperRef.current?.clientHeight || window.innerHeight;
@@ -119,7 +117,7 @@ const InteractiveMap = forwardRef((props, ref) => {
   return (
     <div className="map-wrapper" ref={mapWrapperRef}>
       <button className="reset-button" onClick={resetPosition}>
-        Reset
+        {t('reset')}
       </button>
       <TransformWrapper
         onInit={(api) => {
@@ -135,7 +133,6 @@ const InteractiveMap = forwardRef((props, ref) => {
         doubleClick={{ disabled: true }}
         limitToBounds={false}
         centerOnInit={false}
-        // onTransformed={handleTransformed}
         bounds={getTransformBounds}
         smooth={true}
       >
@@ -156,7 +153,6 @@ const InteractiveMap = forwardRef((props, ref) => {
                 style={{ left: building.x, top: building.y }}
                 onClick={(e) => handleMapClick(building, e)}
               >
-
                 <span className="marker-number">{building.number}</span>
               </div>
             ))}
@@ -179,13 +175,13 @@ const InteractiveMap = forwardRef((props, ref) => {
                   )}
                   <Card.Body className="card-body">
                     <Card.Title className="card-title mb-3">
-                      อาคาร {selectedBuilding.number}
+                      {t('building')} {selectedBuilding.number}
                     </Card.Title>
                     <Card.Subtitle className="card-subtitle mb-2">
-                      {selectedBuilding.title}
+                      {t(selectedBuilding.titleKey)}
                     </Card.Subtitle>
                     <Card.Text className="card-text mb-1">
-                      {selectedBuilding.content}
+                      {t(selectedBuilding.contentKey)}
                     </Card.Text>
                     <button className="popup-close" onClick={handleClosePopup}>
                       &#10006;
