@@ -1,0 +1,339 @@
+.language-selector {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 700;
+    transition: all 0.2s ease;
+}
+
+.language-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: white;
+    border: 2px solid #000;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    min-height: 44px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.language-toggle:hover {
+    background: #f8f9fa;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.language-toggle:focus {
+    outline: 2px solid #0066cc;
+    outline-offset: 2px;
+}
+
+.language-toggle:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flag-emoji {
+    font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.language-divider {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+    margin: 0 2px;
+}
+
+.language-name {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #000;
+}
+
+.dropdown-menu {
+    border: 2px solid #000;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    min-width: 120px;
+    animation: dropdownFade 0.2s ease-out;
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    transition: all 0.15s ease;
+    min-height: 44px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-item.active {
+    background-color: #e9ecef;
+    font-weight: bold;
+}
+
+.dropdown-item:focus {
+    background-color: #e9ecef;
+    outline: none;
+}
+
+.navbar-language-selector {
+    position: static;
+    top: auto;
+    right: auto;
+    z-index: auto;
+    width: 100%;
+
+}
+
+.navbar-language-selector .language-toggle {
+    width: 100%;
+    justify-content: center;
+    background: #333;
+    color: white;
+    border: 2px solid #555;
+}
+
+.navbar-language-selector .language-toggle:hover {
+    background: #444;
+    transform: none;
+}
+
+.navbar-language-selector .language-name {
+    color: white;
+}
+
+.navbar-language-selector .language-divider {
+    color: #ccc;
+}
+
+.navbar-language-selector .dropdown-menu {
+    width: 100%;
+    background: #333;
+    border-color: #555;
+}
+
+.navbar-language-selector .dropdown-item {
+    color: white;
+}
+
+.navbar-language-selector .dropdown-item:hover,
+.navbar-language-selector .dropdown-item:focus {
+    background-color: #444;
+}
+
+.navbar-language-selector .dropdown-item.active {
+    background-color: #555;
+}
+
+.navbar-language-selector .dropdown-item .language-divider {
+    color: #ccc;
+}
+
+@media (max-width: 992px) {
+    .language-selector {
+        top: 15px;
+        right: 15px;
+    }
+
+    .language-toggle {
+        padding: 7px 11px;
+    }
+
+    .flag-emoji {
+        font-size: 16px;
+    }
+
+    .language-name {
+        font-size: 13px;
+    }
+
+    .language-divider {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 768px) {
+
+
+    .language-selector:not(.navbar-language-selector) {
+        display: none;
+    }
+
+
+    .navbar-language-selector {
+        display: block;
+    }
+
+    .language-toggle {
+        padding: 8px 12px;
+        gap: 8px;
+        min-height: 44px;
+        border-width: 1.5px;
+    }
+
+    .flag-emoji {
+        font-size: 16px;
+    }
+
+    .language-name {
+        font-size: 14px;
+    }
+
+    .language-divider {
+        font-size: 14px;
+    }
+
+    .dropdown-menu {
+        border-width: 1.5px;
+        min-width: 100px;
+    }
+
+    .dropdown-item {
+        padding: 10px 16px;
+        gap: 8px;
+        min-height: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    .language-toggle {
+        padding: 6px 10px;
+        gap: 6px;
+        min-height: 40px;
+        border-radius: 6px;
+    }
+
+    .flag-emoji {
+        font-size: 14px;
+    }
+
+    .language-name {
+        font-size: 12px;
+    }
+
+    .language-divider {
+        font-size: 12px;
+    }
+
+    .dropdown-menu {
+        border-radius: 6px;
+        min-width: 90px;
+    }
+
+    .dropdown-item {
+        padding: 8px 12px;
+        gap: 6px;
+        min-height: 40px;
+    }
+}
+
+@media (max-width: 360px) {
+    .language-selector:not(.navbar-language-selector) .language-name {
+        display: none;
+    }
+
+    .language-selector:not(.navbar-language-selector) .language-divider {
+        display: none;
+    }
+
+    .language-selector:not(.navbar-language-selector) .language-toggle {
+        padding: 6px;
+        gap: 0;
+        min-width: 36px;
+        justify-content: center;
+    }
+
+    .language-selector:not(.navbar-language-selector) .flag-emoji {
+        font-size: 16px;
+    }
+
+    .dropdown-menu {
+        min-width: 80px;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .language-toggle {
+        min-height: 44px;
+        padding: 8px 12px;
+    }
+
+    .dropdown-item {
+        min-height: 44px;
+        padding: 10px 16px;
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    .language-toggle {
+        border-width: 1px;
+    }
+
+    .dropdown-menu {
+        border-width: 1px;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .language-selector:not(.navbar-language-selector) {
+        top: 5px;
+        right: 5px;
+    }
+
+    .language-toggle {
+        padding: 4px 8px;
+        min-height: 32px;
+    }
+
+    .flag-emoji {
+        font-size: 14px;
+    }
+
+    .language-name {
+        font-size: 10px;
+    }
+
+    .language-divider {
+        font-size: 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .language-selector,
+    .language-toggle,
+    .dropdown-item,
+    .dropdown-menu {
+        transition: none;
+        animation: none;
+    }
+
+    .language-toggle:hover {
+        transform: none;
+    }
+}

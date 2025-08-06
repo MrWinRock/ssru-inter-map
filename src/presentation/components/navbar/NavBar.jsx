@@ -1,11 +1,14 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useTranslation } from 'react-i18next';
 import buildings from "./../../../data/building/buildings";
 import logo from "./../../assets/images/logo.png";
+import LanguageSelector from "../selector/LanguageSelector";
 
 import { Offcanvas, Button } from "react-bootstrap";
 import "./NavBar.css";
 
 const NavBar = ({ mapRef }) => {
+  const { t } = useTranslation();
   const [show, setShow] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const offcanvasRef = useRef(null);
@@ -18,17 +21,11 @@ const NavBar = ({ mapRef }) => {
     setSelectedId(selectedId === id ? null : id);
   };
 
-  // const handleShowNavbar = () => {
-  //   setShow(true);
-  // };
-
   const handleCloseNavbar = useCallback(() => {
     setShow(false);
   }, []);
 
   const handleAreaButtonClick = (id) => {
-    // handleShowNavbar();
-    // setSelectedId(id);
     toggleBuilding(id);
   };
 
@@ -71,21 +68,27 @@ const NavBar = ({ mapRef }) => {
         <div className="header-container">
           <img src={logo} alt="Logo" className="logo" />
           <span className="devider"></span>
-          <Button
-            variant="link"
-            className="hamburger-btn"
-            onClick={toggleNavbar}
-          >
-            <div className={`hamburger ${show ? "open" : ""}`}>
-              <span></span>
-              <span></span>
-              <span></span>
+          <div className="items-container">
+            <div className="mobile-language-selector">
+              <LanguageSelector inNavbar={true} />
             </div>
-          </Button>
+            <Button
+              variant="link"
+              className="hamburger-btn"
+              onClick={toggleNavbar}
+            >
+              <div className={`hamburger ${show ? "open" : ""}`}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </Button>
+          </div>
         </div>
       </div>
 
       <div ref={offcanvasRef}>
+
         <Offcanvas
           show={show}
           onHide={handleCloseNavbar}
@@ -96,11 +99,12 @@ const NavBar = ({ mapRef }) => {
         >
           <Offcanvas.Header className="canvas-header">
             <h1 className="display-5 font-weight-bold text-center z-index-100">
-              อาคาร
+              {t('buildings')}
             </h1>
           </Offcanvas.Header>
           <span className="devider"></span>
           <Offcanvas.Body className="canvas-body">
+
             {[...new Set(buildings.map((building) => building.id))].map(
               (id) => (
                 <div key={id} className="w-100 mb-2">
@@ -111,7 +115,7 @@ const NavBar = ({ mapRef }) => {
                     style={{ background: "#222" }}
                     onClick={() => handleAreaButtonClick(id)}
                   >
-                    เขตพื้นที่ {id}
+                    {t('area')} {id}
                   </Button>
                   {selectedId === id && (
                     <div className="building-button-container">
@@ -125,7 +129,7 @@ const NavBar = ({ mapRef }) => {
                             style={{ background: "#444" }}
                             onClick={() => handleButtonClick(building.number)}
                           >
-                            อาคาร <strong>{building.number}</strong>
+                            {t('building')} <strong>{building.number}</strong>
                           </Button>
                         ))}
                     </div>
