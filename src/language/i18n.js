@@ -181,7 +181,7 @@ const resources = {
             "building": "Building",
             "reset": "Reset",
             "contact": "Contact",
-            "university_name": "SUAN SUAN‑SUNANDHA RAJABHAT UNIVERSITY",
+            "university_name": "SUAN SUNANDHA RAJABHAT UNIVERSITY",
             "university_address": "1 U‑Thong Nok Road, Dusit, Bangkok 10300 Thailand",
             "language": "Language",
             "thai": "ไทย",
