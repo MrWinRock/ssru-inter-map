@@ -68,22 +68,18 @@ const NavBar = ({ mapRef }) => {
         <div className="header-container">
           <img src={logo} alt="Logo" className="logo" />
           <span className="devider"></span>
-          <div className="items-container">
-            <div className="mobile-language-selector">
-              <LanguageSelector inNavbar={true} />
+          <LanguageSelector />
+          <button
+            type="button"
+            className="hamburger-btn"
+            onClick={toggleNavbar}
+          >
+            <div className={`hamburger ${show ? "open" : ""}`}>
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
-            <Button
-              variant="link"
-              className="hamburger-btn"
-              onClick={toggleNavbar}
-            >
-              <div className={`hamburger ${show ? "open" : ""}`}>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </Button>
-          </div>
+          </button>
         </div>
       </div>
 
