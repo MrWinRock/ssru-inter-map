@@ -4,7 +4,7 @@
   align-items: center;
   margin: 20px auto 10px 190px;
   width: 85vw;
-  height: 85vh;
+  height: 95vh;
   overflow: hidden;
   background: white;
   border: 3px solid black;
@@ -92,7 +92,7 @@
   color: red;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1440px) {
   .map-wrapper {
     width: 100vw;
     height: calc(100vh - 65px);
