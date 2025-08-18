@@ -37,6 +37,8 @@ const NavBar = ({ mapRef }) => {
     } else {
       console.error("Building not found or mapRef is null");
     }
+
+    setShow(false);
   };
 
   useEffect(() => {
@@ -64,26 +66,22 @@ const NavBar = ({ mapRef }) => {
 
   return (
     <>
-      <div className="fixed-left d-flex align-items-center p-3">
+      <div className="fixed-left d-flex align-items-center">
         <div className="header-container">
           <img src={logo} alt="Logo" className="logo" />
           <span className="devider"></span>
-          <div className="items-container">
-            <div className="mobile-language-selector">
-              <LanguageSelector inNavbar={true} />
+          <LanguageSelector />
+          <button
+            type="button"
+            className="hamburger-btn"
+            onClick={toggleNavbar}
+          >
+            <div className={`hamburger ${show ? "open" : ""}`}>
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
-            <Button
-              variant="link"
-              className="hamburger-btn"
-              onClick={toggleNavbar}
-            >
-              <div className={`hamburger ${show ? "open" : ""}`}>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </Button>
-          </div>
+          </button>
         </div>
       </div>
 

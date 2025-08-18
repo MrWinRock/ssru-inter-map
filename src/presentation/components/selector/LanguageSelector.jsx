@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Dropdown } from 'react-bootstrap';
 import './LanguageSelector.css';
 
-const LanguageSelector = ({ inNavbar = false }) => {
+const LanguageSelector = () => {
     const { i18n, t } = useTranslation();
     const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
 
@@ -27,7 +27,7 @@ const LanguageSelector = ({ inNavbar = false }) => {
     }, [i18n.language]);
 
     return (
-        <div className={`language-selector ${inNavbar ? 'navbar-language-selector' : ''}`}>
+        <div className="language-selector">
             <Dropdown>
                 <Dropdown.Toggle
                     variant="outline-dark"
