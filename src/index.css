@@ -3,3 +3,11 @@
 * {
   font-family: "Prompt", sans-serif;
 }
+
+html,
+body,
+#root {
+  height: 100%;
+  overscroll-behavior-y: none;
+  overscroll-behavior: none;
+}

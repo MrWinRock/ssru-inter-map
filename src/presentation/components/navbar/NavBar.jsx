@@ -106,29 +106,26 @@ const NavBar = ({ mapRef }) => {
             {[...new Set(buildings.map((building) => building.id))].map(
               (id) => (
                 <div key={id} className="w-100 mb-2">
-                  <Button
+                  <button
                     variant="primary"
-                    className={`area-button w-100 mb-2 ${selectedId === id ? "active" : ""
-                      }`}
-                    style={{ background: "#222" }}
+                    className={`area-button w-100 mb-2 ${selectedId === id ? "active" : ""}`}
                     onClick={() => handleAreaButtonClick(id)}
                   >
                     {t('area')} {id}
-                  </Button>
+                  </button>
                   {selectedId === id && (
                     <div className="building-button-container">
                       {buildings
                         .filter((building) => building.id === id)
                         .map((building) => (
-                          <Button
+                          <button
                             key={building.number}
                             variant="secondary"
-                            className="building-button w-30 m-2"
-                            style={{ background: "#444" }}
+                            className="building-button"
                             onClick={() => handleButtonClick(building.number)}
                           >
                             {t('building')} <strong>{building.number}</strong>
-                          </Button>
+                          </button>
                         ))}
                     </div>
                   )}
