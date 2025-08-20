@@ -20,7 +20,7 @@ const InteractiveMap = forwardRef((props, ref) => {
   const mapWrapperRef = useRef(null);
 
   const initialScale = 0.7;
-  const initialPositionX = 50;
+  const initialPositionX = 20;
   const initialPositionY = 1500;
 
   const MIN_ZOOM = 0.5;
