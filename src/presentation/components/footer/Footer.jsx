@@ -26,17 +26,6 @@ const Footer = () => {
               </h2>
               <p>{t('university_address')}</p>
             </div>
-            <div className="footer-contact-item">
-              <h2 className="h5 fw-semibold">{t('contact')}</h2>
-              <div className="mt-2">
-                <h4 className="fw-medium">Pharthiwath (Win)</h4>
-                <p>s65122250031@ssru.ac.th</p>
-              </div>
-              <div className="mt-2">
-                <h4 className="fw-medium">Tadsanai (Dew)</h4>
-                <p>s65122250037@ssru.ac.th</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
