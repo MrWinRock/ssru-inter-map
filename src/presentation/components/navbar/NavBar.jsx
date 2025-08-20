@@ -107,7 +107,6 @@ const NavBar = ({ mapRef }) => {
               (id) => (
                 <div key={id} className="w-100 mb-2">
                   <button
-                    variant="primary"
                     className={`area-button w-100 mb-2 ${selectedId === id ? "active" : ""}`}
                     onClick={() => handleAreaButtonClick(id)}
                   >
@@ -120,7 +119,6 @@ const NavBar = ({ mapRef }) => {
                         .map((building) => (
                           <button
                             key={building.number}
-                            variant="secondary"
                             className="building-button"
                             onClick={() => handleButtonClick(building.number)}
                           >
