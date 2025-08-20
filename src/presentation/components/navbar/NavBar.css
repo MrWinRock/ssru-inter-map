@@ -15,7 +15,7 @@
   align-items: center;
   background: #fff;
   border-right: 1px solid black;
-  padding: 1rem;
+  padding: 1rem .5rem;
 }
 
 .header-container {
@@ -100,10 +100,11 @@
 }
 
 .building-button-container {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25rem;
   width: 100%;
+  padding: 0 0.25rem;
 }
 
 .area-button {
@@ -133,20 +134,42 @@
   transform: rotate(180deg);
 }
 
-.area-button,
+.area-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fb8dc0;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  color: #fff;
+  padding: .5rem .75rem;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
 .building-button {
-  border: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #8b83ff;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+  padding: .5rem .75rem;
   box-shadow: none !important;
   outline: none !important;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .area-button:hover {
-  background-color: #3d3d3d !important;
+  background-color: #f575b1 !important;
 }
 
 .building-button:hover {
-  background-color: #555 !important;
+  background-color: #7167ff;
 }
 
 .area-button:active,
@@ -170,6 +193,7 @@
     justify-content: space-between;
     align-items: center;
     height: auto;
+    margin: 0 1rem;
   }
 
   .logo {

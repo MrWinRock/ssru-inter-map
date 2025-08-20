@@ -276,6 +276,10 @@ const resources = {
                     "title": "Voralaksananong Building",
                     "content": ""
                 },
+                "39": {
+                    "title": "Health Center and Swimming Pool",
+                    "content": ""
+                },
                 "41": {
                     "title": "Sasibongse Prabai Building",
                     "content": "Institute of Research and Development"
