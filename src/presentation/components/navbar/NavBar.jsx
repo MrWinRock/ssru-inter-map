@@ -122,7 +122,7 @@ const NavBar = ({ mapRef }) => {
                             className="building-button"
                             onClick={() => handleButtonClick(building.number)}
                           >
-                            {t('building')} <strong>{building.number}</strong>
+                            {t('building')} {building.number}
                           </button>
                         ))}
                     </div>
