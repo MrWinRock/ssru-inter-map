@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import buildings from "./../../../data/building/buildings";
 import logo from "./../../assets/images/logo.png";
 import LanguageSelector from "../selector/LanguageSelector";
-import Footer from "../footer/Footer"
+import Footer from "../footer/Footer";
 
 import { Offcanvas } from "react-bootstrap";
 import "./NavBar.css";
