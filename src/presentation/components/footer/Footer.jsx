@@ -29,7 +29,7 @@ const Footer = () => {
             </div>
           </div>
           <div className='footer-links'>
-            <a href="https://github.com/MrWinRock/ssru-inter-map" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/MrWinRock/ssru-inter-map" target="_blank" rel="noopener noreferrer nofollow">
               <img src={github_logo} alt="GitHub Logo" />
             </a>
           </div>
