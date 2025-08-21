@@ -3,8 +3,9 @@ import { useTranslation } from 'react-i18next';
 import buildings from "./../../../data/building/buildings";
 import logo from "./../../assets/images/logo.png";
 import LanguageSelector from "../selector/LanguageSelector";
+import Footer from "../footer/Footer";
 
-import { Offcanvas, Button } from "react-bootstrap";
+import { Offcanvas } from "react-bootstrap";
 import "./NavBar.css";
 
 const NavBar = ({ mapRef }) => {
@@ -102,37 +103,39 @@ const NavBar = ({ mapRef }) => {
           </Offcanvas.Header>
           <span className="devider"></span>
           <Offcanvas.Body className="canvas-body">
-
-            {[...new Set(buildings.map((building) => building.id))].map(
-              (id) => (
-                <div key={id} className="w-100 mb-2">
-                  <button
-                    className={`area-button w-100 mb-2 ${selectedId === id ? "active" : ""}`}
-                    onClick={() => handleAreaButtonClick(id)}
-                  >
-                    {t('area')} {id}
-                  </button>
-                  {selectedId === id && (
-                    <div className="building-button-container">
-                      {buildings
-                        .filter((building) => building.id === id)
-                        .map((building) => (
-                          <button
-                            key={building.number}
-                            className="building-button"
-                            onClick={() => handleButtonClick(building.number)}
-                          >
-                            {t('building')} {building.number}
-                          </button>
-                        ))}
-                    </div>
-                  )}
-                </div>
-              )
-            )}
-          </Offcanvas.Body>
-        </Offcanvas>
-      </div>
+            <div className="canvas-items">
+              {[...new Set(buildings.map((building) => building.id))].map(
+                (id) => (
+                  <div key={id} className="w-100 mb-2">
+                    <button
+                      className={`area-button w-100 mb-2 ${selectedId === id ? "active" : ""}`}
+                      onClick={() => handleAreaButtonClick(id)}
+                    >
+                      {t('area')} {id}
+                    </button>
+                    {selectedId === id && (
+                      <div className="building-button-container">
+                        {buildings
+                          .filter((building) => building.id === id)
+                          .map((building) => (
+                            <button
+                              key={building.number}
+                              className="building-button"
+                              onClick={() => handleButtonClick(building.number)}
+                            >
+                              {t('building')} {building.number}
+                            </button>
+                          ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              )}
+            </div>
+            <Footer />
+          </Offcanvas.Body >
+        </Offcanvas >
+      </div >
     </>
   );
 };
