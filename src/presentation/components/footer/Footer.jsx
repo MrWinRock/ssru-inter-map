@@ -1,31 +1,37 @@
 import { useTranslation } from 'react-i18next';
 import logo from "./../../assets/images/logo.png";
+import github_logo from "./../../assets/images/github-icon.svg";
+
+import "./Footer.css";
 
 const Footer = () => {
   const { t } = useTranslation();
 
   return (
     <div
-      className="footer d-flex flex-column align-items-center justify-content-center bg-light mt-5 p-3 text-center"
-      style={{ background: "#F2F2F2" }}
+      className="footer"
     >
-      <div className="footer-wrapper w-100 container-lg">
-        <div className="footer-container d-flex flex-column align-items-center">
-          <div className="footer-logo mb-3">
+      <div className="footer-wrapper">
+        <div className="footer-container">
+          <div className="footer-logo">
             <img
               src={logo}
               alt="Logo"
               style={{ width: "50px", height: "50px" }}
-              className="mb-2 mx-auto"
             />
           </div>
-          <div className="footer-contact small text-dark">
-            <div className="footer-contact-item mb-3">
-              <h2 className="h5 fw-semibold">
+          <div className="footer-content">
+            <div className="footer-content-item">
+              <h2 className="footer-university">
                 {t('university_name')}
               </h2>
               <p>{t('university_address')}</p>
             </div>
+          </div>
+          <div className='footer-links'>
+            <a href="https://github.com/MrWinRock/ssru-inter-map" target="_blank" rel="noopener noreferrer">
+              <img src={github_logo} alt="GitHub Logo" />
+            </a>
           </div>
         </div>
       </div>
